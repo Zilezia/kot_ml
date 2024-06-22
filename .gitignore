@@ -1,0 +1,10 @@
+.venv/
+
+labelImg/
+yolov5/
+
+data/images/*
+data/labels/*
+data/labels.cache
+
+temp
