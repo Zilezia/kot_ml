@@ -1,18 +1,19 @@
 import torch
-import matplotlib.pyplot as plt
 import numpy as np
 import cv2
-import uuid
-import os
-import time
-import pandas as pd
+# import matplotlib.pyplot as plt
+# import uuid
+# import os
+# import time
+# import pandas as pd
 
 def app():
+    train_path = 'exp26/weights/best.pt'
     # model = torch.hub.load("ultralytics/yolov5", "yolov5s")
     model = torch.hub.load(
         "ultralytics/yolov5", 
         "custom", 
-        path='yolov5/runs/train/exp14/weights/last.pt',
+        path=f'yolov5/runs/train/{train_path}',
         force_reload=True
     )
 
@@ -44,6 +45,10 @@ def app():
             if confidence > 0.7:
                 if int(class_id) == 15:
                     print('kot, confidence:', confidence.item())
+                
+            if confidence > 0.5:
+                if int(class_id) == 16:
+                    print("might be cleaning herself, confidence", confidence.item())
                 
         cv2.imshow('kot_ml', np.squeeze(results.render()))
 
